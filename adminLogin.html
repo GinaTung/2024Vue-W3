@@ -28,7 +28,10 @@
             <a class="nav-link" aria-current="page" href="adminLogin.html">管理者登入</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="adminProducts.html">產品管理</a>
+            <a class="nav-link" href="adminProducts-w2.html" type="button">W2產品管理</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="adminProducts-w3.html" type="button">W3產品管理</a>
           </li>
           <!-- <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -64,8 +67,11 @@
               <input type="password" class="form-control" v-model="user.password" id="password" placeholder="Password" required>
               <label for="password">Password</label>
             </div>
-            <button class="btn btn-lg btn-primary w-100 mt-3" type="submit" id="login">
-              登入
+            <button class="btn btn-lg btn-primary w-100 mt-3" type="submit" id="login" @click="setAdmin('w2')">
+              登入-W2作業
+            </button>
+            <button class="btn btn-lg btn-primary w-100 mt-3" type="submit" id="login" @click="setAdmin('w3')">
+              登入-W3作業
             </button>
             <a class="btn btn-lg btn-dark w-100 mt-3" type="button" href="index.html">
               回前台
