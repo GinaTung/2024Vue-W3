@@ -7,10 +7,10 @@ createApp({
       api_url: "https://ec-course-api.hexschool.io/v2",
       api_path: "yuling2023",
       user: {
-        emailInput: "",
+        username: "",
         password: "",
       },
-      products: [],
+      products: {},
       tempProduct: {},
       tempProduct2: {},
       singleProduct: {
@@ -35,6 +35,7 @@ createApp({
     };
   },
   methods: {
+    //1.取得遠端資料 2.渲染左側區塊 3.渲染右側區塊
     checkAdmin() {
       axios
         .post(`${this.api_url}/api/user/check`)
@@ -51,9 +52,10 @@ createApp({
     },
     getProducts() {
       axios
-        .get(`${this.api_url}/api/${this.api_path}/admin/products`)
+        .get(`${this.api_url}/api/${this.api_path}/admin/products/all`)
         .then((res) => {
           // console.log(res);
+          //產出products資料要確認是陣列還是物件，這邊產出是物件
           this.products = res.data.products;
           // alert(`已取得產品列表`)
         })
@@ -101,6 +103,7 @@ createApp({
     },
   },
   mounted() {
+    //取得cookie資料
     const token = document.cookie.replace(
       /(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/,
       "$1"
@@ -117,7 +120,7 @@ const app2 = {
       api_url: "https://ec-course-api.hexschool.io/v2",
       api_path: "yuling2023",
       user: {
-        emailInput: "",
+        username: "",
         password: "",
       },
     };

@@ -7,7 +7,7 @@ createApp({
       api_url: "https://ec-course-api.hexschool.io/v2",
       api_path: "yuling2023",
       user: {
-        emailInput: "",
+        username: "",
         password: "",
       },
     };
@@ -18,9 +18,9 @@ createApp({
       axios
         .post(`${this.api_url}/admin/signin`, this.user)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           alert(`${res.data.message}`);
-          window.location = 'adminProducts.html';
+          window.location = 'adminProducts-w2.html';
           // unix.timestamp
           //取得token
           const { expired, token } = res.data;
@@ -29,7 +29,7 @@ createApp({
           document.cookie = `hexToken=${token}; expires=${new Date(expired)}`;
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
           //   console.dir(err);
           alert(`${err.data.message}`);
         });
