@@ -40,7 +40,7 @@ createApp({
         .get(`${this.api_url}/api/${this.api_path}/admin/products`)
         .then((res) => {
           this.products = res.data.products;
-          console.log(this.products);
+          // console.log(res);
         })
         .catch((arr) => {
           alert(`${err.data.message}`);
@@ -58,6 +58,9 @@ createApp({
 
       }else if(status === 'edit'){
         this.tempProduct = { ...product };
+        if(!Array.isArray(this.tempProduct.imagesUrl)){
+          this.tempProduct.imagesUrl=[];
+        }
         this.isNew = false;
         this.modalProduct.show();
       }else if(status === 'delete'){

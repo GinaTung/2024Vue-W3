@@ -95,6 +95,25 @@
             </tr>
           </tbody>
         </table>
+        <div>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
       <!-- Modal -->
       <div
@@ -109,7 +128,7 @@
           <div class="modal-content border-0">
             <div class="modal-header bg-dark text-white">
               <h5 id="productModalLabel" class="modal-title">
-                <span>新增產品</span>
+                <span>{{ isNew ? "新增產品" : "編輯產品"}}</span>
               </h5>
               <button
                 type="button"
@@ -132,20 +151,29 @@
                         placeholder="請輸入圖片連結"
                       />
                     </div>
-                    <img class="img-fluid" :src="tempProduct.imageUrl" :alt="tempProduct.title" />
+                    <img class="img-fluid" :src="tempProduct.imageUrl" alt="" />
                   </div>
-                  <!-- <div>
-                    <button v-if=""
+                  <!-- 多圖設置 -->
+                  <!-- 判斷 tempProduct.imagesUrl"是一個陣列-->
+                  <div v-if="Array.isArray(tempProduct.imagesUrl)">
+                    <div v-for="(item,key) in tempProduct.imagesUrl" :kwy="key+1213">
+                      <img :src="item" alt="" class="img-fluid my-2">
+                      <input type="text" class="form-control" v-model="tempProduct.imagesUrl[key]">
+                    </div>
+                    <!-- v-if 判斷沒有圖片時顯示或有點選新增圖片未填寫完成網址時 -->
+                    <button 
                       class="btn btn-outline-primary btn-sm d-block w-100"
+                      v-if="tempProduct.imagesUrl.length ===0 || tempProduct.imagesUrl[tempProduct.imagesUrl.length-1]"
+                      @click="tempProduct.imagesUrl.push('')"
                     >
                       新增圖片
                     </button>
-                  </div>
-                  <div v-else>
-                    <button class="btn btn-outline-danger btn-sm d-block w-100">
+                    <button v-else class="btn btn-outline-danger btn-sm d-block w-100" @click="tempProduct.imagesUrl.pop()">
                       刪除圖片
                     </button>
-                  </div> -->
+                  </div>
+                  <div>
+                  </div>
                 </div>
                 <div class="col-sm-8">
                   <!-- <pre>
